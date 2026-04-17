@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dino's Scripting Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#05070c;
+--panel:#0e1118;
+--cyan:#00ffa6;
+--text:#e8e8e8;
+--muted:#8c93a3;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+font-family:"JetBrains Mono", monospace;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+}
+
+.container{max-width:1250px;margin:auto;padding:0 26px}
+
+section{padding:140px 0}
+
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(0,255,170,0.15);
+z-index:1000;
+}
+
+.nav-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+}
+
+.logo{
+font-weight:700;
+color:var(--cyan);
+letter-spacing:1px;
+}
+
+.nav-links a{
+margin-left:30px;
+text-decoration:none;
+color:var(--muted);
+transition:.25s;
+font-size:14px;
+}
+
+.nav-links a:hover{color:var(--cyan)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:90px;
+}
+
+.badge{
+border:1px solid rgba(0,255,170,.35);
+color:var(--cyan);
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+font-size:12px;
+margin-bottom:24px;
+}
+
+.hero h1{font-size:60px;margin-bottom:22px}
+.hero span{color:var(--cyan)}
+
+.hero p{color:var(--muted);margin-bottom:32px}
+
+.buttons a{
+padding:14px 28px;
+border-radius:14px;
+text-decoration:none;
+font-size:14px;
+margin-right:12px;
+transition:.25s;
+}
+
+.btn-primary{
+background:var(--cyan);
+color:black;
+box-shadow:0 0 25px rgba(0,255,170,.35);
+}
+
+.btn-primary:hover{transform:translateY(-3px)}
+
+.btn-outline{
+border:1px solid var(--cyan);
+color:var(--cyan);
+}
+
+.btn-outline:hover{background:rgba(0,255,170,.1)}
+
+.code-box{
+background:black;
+border:1px solid rgba(0,255,170,.25);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 35px rgba(0,255,170,.1);
+color:var(--cyan);
+animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* SECTION HEADERS */
+.section-label{
+color:var(--cyan);
+font-size:13px;
+margin-bottom:12px;
+opacity:.9;
+}
+
+.section-title{
+font-size:46px;
+font-weight:700;
+margin-bottom:25px;
+}
+
+.section-title span{color:var(--cyan)}
+
+.section-desc{
+color:var(--muted);
+max-width:700px;
+}
+
+/* PROJECTS */
+.projects-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+gap:40px;
+margin-top:60px;
+}
+
+.project-card{
+background:var(--panel);
+border:1px solid rgba(0,255,170,.15);
+border-radius:26px;
+overflow:hidden;
+transition:.35s;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+
+.project-card:hover{
+transform:translateY(-10px) scale(1.02);
+border-color:var(--cyan);
+box-shadow:0 0 40px rgba(0,255,170,.25);
+}
+
+.project-card iframe{
+width:100%;
+height:260px;
+border:none;
+}
+
+.project-info{
+padding:22px;
+font-size:15px;
+}
+
+.featured{
+font-size:11px;
+padding:4px 9px;
+background:var(--cyan);
+color:black;
+border-radius:8px;
+margin-left:8px;
+}
+
+/* SKILLS */
+.skills{background:#0a0d13}
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:32px;
+margin-top:60px;
+}
+
+.skill{
+padding:30px;
+background:black;
+border:1px solid rgba(0,255,170,.15);
+border-radius:24px;
+transition:.35s;
+box-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+.skill:hover{
+transform:translateY(-8px);
+border-color:var(--cyan);
+box-shadow:0 0 35px rgba(0,255,170,.25);
+}
+
+.skill small{
+color:var(--cyan);
+margin-bottom:8px;
+display:block;
+}
+
+/* ABOUT */
+.about{padding-top:180px}
+
+.about-grid{
+display:grid;
+grid-template-columns:1.3fr 1fr;
+gap:80px;
+margin-top:60px;
+}
+
+.stat-box{
+background:var(--panel);
+border:1px solid rgba(0,255,170,.15);
+padding:30px;
+border-radius:22px;
+margin-bottom:25px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,.6);
+}
+
+.stat-box h3{
+color:var(--cyan);
+font-size:30px;
+}
+
+.stat-box p{color:var(--muted);font-size:13px}
+
+/* CONTACT */
+.contact{padding-top:180px;text-align:center}
+
+.discord-btn{
+display:inline-block;
+padding:16px 34px;
+border-radius:16px;
+background:#5865F2;
+color:white;
+text-decoration:none;
+font-size:14px;
+box-shadow:0 0 25px rgba(88,101,242,.6);
+margin-top:40px;
+transition:.3s;
+}
+
+.discord-btn:hover{
+transform:translateY(-4px) scale(1.05);
+box-shadow:0 0 40px rgba(88,101,242,1);
+}
+
+footer{
+border-top:1px solid rgba(0,255,170,.12);
+text-align:center;
+padding:45px;
+margin-top:120px;
+color:#777;
+font-size:13px;
+}
+
+@media(max-width:900px){
+.hero-grid{grid-template-columns:1fr}
+.about-grid{grid-template-columns:1fr}
+.hero h1{font-size:42px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container nav-inner">
+<div class="logo">Dino</div>
+<div class="nav-links">
+<a href="#projects">Projects</a>
+<a href="#skills">Skills</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+
+<section class="hero container">
+
+<div class="hero-grid">
+
+<div>
+<div class="badge">Roblox Luau Scripter</div>
+
+<h1>Dino's <span>Scripting</span> Portfolio</h1>
+
+<p>
+Professional Roblox developer specializing in complex game systems, UI frameworks, and scalable gameplay architecture.
+</p>
+
+<div class="buttons">
+<a class="btn-primary" href="#projects">View My Work</a>
+<a class="btn-outline" href="#contact">Hire Me</a>
+</div>
+
+</div>
+
+<div class="code-box">
+<pre>
+local Players = game:GetService("Players")
+
+local System = {}
+
+function System:Init(player)
+ print(player.Name .. " joined")
+end
+
+Players.PlayerAdded:Connect(function(player)
+ System:Init(player)
+end)
+</pre>
+</div>
+
+</div>
+</section>
+
+<section id="projects" class="container">
+
+<div class="section-label">// projects</div>
+<div class="section-title">Featured <span></span></div>
+<div class="section-desc">A showcase of advanced Roblox systems I've scripted including combat frameworks, gameplay mechanics, and server architecture.</div>
+
+<div class="projects-grid">
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/nk39yf"></iframe>
+<div class="project-info">Combat System <span class="featured">Featured</span></div>
+</div>
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/ylht3w"></iframe>
+<div class="project-info">Drone System </div>
+</div>
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/xbf2vl"></iframe>
+<div class="project-info">Movement System <span class="featured">Featured</span></div>
+</div>
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/9krsmy"></iframe>
+<div class="project-info">Voting System</div>
+</div>
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/p2ziv1"></iframe>
+<div class="project-info">Mining System</div>
+</div>
+
+<div class="project-card">
+<iframe src="https://streamable.com/e/zhbbkk"></iframe>
+<div class="project-info">Dialogue System</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="skills" class="skills">
+
+<div class="container">
+
+<div class="section-label">// skills</div>
+<div class="section-title">Scripting <span>Skills</span></div>
+
+<div class="skills-grid">
+
+<div class="skill"><small>Server</small>Server </div>
+<div class="skill"><small>UI</small>Client UI Frameworks</div>
+<div class="skill"><small>Networking</small>Remote Events</div>
+<div class="skill"><small>Data</small>DataStores</div>
+<div class="skill"><small>Performance</small>Optimization</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="about" class="about container">
+
+<div class="section-label">// about me</div>
+<div class="section-title">The <span>Developer</span></div>
+
+<div class="about-grid">
+
+<p class="section-desc">
+I'm a passionate Roblox developer with deep expertise in Luau scripting and game system design. I've built a lot of systems and i can do most of the things.
+</p>
+
+<div>
+
+<div class="stat-box">
+<h3>3+</h3>
+<p>Years Experience</p>
+</div>
+
+
+
+</section>
+
+<section id="contact" class="contact container">
+
+<div class="section-label">// get in touch</div>
+<div class="section-title">Let's <span>Work Together</span></div>
+
+<p class="section-desc" style="margin:auto">
+Looking for a skilled Roblox scripter for your next project? I'm open for commissions and team collaborations. Reach out and let's create something amazing.
+</p>
+
+<a class="discord-btn" href="https://discord.com/users/1235275778888040593" target="_blank">Contact on Discord</a>
+
+</section>
+
+<footer>
+© 2026 Dino — Roblox  Developer
+</footer>
+
+</body>
+</html>
